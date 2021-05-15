@@ -25,9 +25,7 @@ public class Opcao extends JFrame {
 	public static final int INSTRUCAO = 3;
 	public static final int SAIR = 4;
 	
-//	public static final boolean FACIL = false;
-//	public static final int MEDIO = 6;
-//	public static final int DIFICIL =7;
+
 	
 	private	ItemListener handler;
 	private JPanel nivelDoJogo,painel;
@@ -65,7 +63,7 @@ public class Opcao extends JFrame {
 				getContentPane().setBackground(Color.BLACK);
 				this.getContentPane().setLayout(null);
 				//this.setContentPane(fimDoJogo());
-				fimDoJogo();
+//				fimDoJogo();
 				break;
 			}
 			
@@ -76,8 +74,7 @@ public class Opcao extends JFrame {
 		btnFacil = new JRadioButton("<html>#FÁCIL#<br> 4 LIXOS</html>",true);
 	    btnMedio = new JRadioButton("<html>#MÉDIO#<br> 6 LIXOS</html>",false);
 	    btnDificil = new JRadioButton("<html>#DIFÍCIL#<br> 9 LIXOS</html>",false);
-	    btnMouse = new JRadioButton("<html>MOUSE</html>",true);
-	    btnTeclado = new JRadioButton("<html>TECLADO</html>",false);
+	
 	    btnEscolheNivel = new ButtonGroup();
 	    btnEscolheFuncao = new ButtonGroup();
 	    btnOkNivel = new JButton("COMEÇAR");
@@ -91,10 +88,7 @@ public class Opcao extends JFrame {
 	    btnDificil.setBackground(Color.BLACK);
 	    btnDificil.setForeground(Color.white);
 	    btnDificil.setFont(new Font("Arial", Font.BOLD,28));
-	    btnMouse.setForeground(Color.white);
-	    btnMouse.setFont(new Font("Arial", Font.BOLD,28));
-	    btnTeclado.setForeground(Color.white);
-	    btnTeclado.setFont(new Font("Arial", Font.BOLD,28));
+
 	 
 	    
 		btnFacil.setBounds(10,0,200,150);
@@ -103,8 +97,7 @@ public class Opcao extends JFrame {
 		btnOkNivel.setBounds(500,200,100,50);
 		btnOkNivel.setActionCommand("btnComecar");
 		
-		btnMouse.setBounds(10,100,200,100);
-		btnTeclado.setBounds(250,100,200,100);
+
 		
 		
 	    btnEscolheNivel.add(btnFacil);
@@ -115,49 +108,19 @@ public class Opcao extends JFrame {
 	    add(btnFacil);
 	    add(btnMedio);
 	    add(btnDificil);
-	    add(btnMouse);
-	    add(btnTeclado);
+
 	    add(btnOkNivel);
 	   
 	    
 		btnFacil.addItemListener(handler);
 		btnMedio.addItemListener(handler);
 		btnDificil.addItemListener(handler);
-		btnMouse.addItemListener(handler);
-		btnTeclado.addItemListener(handler);
+
 		
-//		return painel;
+
 	}
 
-	public void fimDoJogo() {
-		lbRecordeTotal= new JLabel("RECORDE:");
-		lbRecordeTotal.setBounds(50,200,200,50);
-		
-		lbRecordeAtual= new JLabel("SEU RECORDE:");
-		lbRecordeAtual.setBounds(50,400,200,50);
-		
-		tfRecordeTotal= new JTextField("0");
-		tfRecordeTotal.setBounds(350,200,200,50);
-		
-		tfRecordeAtual= new JTextField("0");
-		tfRecordeAtual.setBounds(350,400,200,50);
-		
-		add(lbRecordeTotal);
-		add(lbRecordeAtual);
-		add(tfRecordeTotal);
-		add(tfRecordeAtual);
-		
-//		return painel;
-//		pontuacaoDeAcertos();
-//		JFrame frame = new JFrame();
-//		 JOptionPane.showMessageDialog(frame,
-//			        ">>NIVEIS: \n "
-//			       +"FACIL:   VALOR \n "+resultado
-//			       +"MÉDIO:   VALOR \n "
-//			       +"DIFÍCIL: VALOR ", //mensagem
-//			        "RECORDES", // titulo da janela 
-//			        JOptionPane.INFORMATION_MESSAGE);
-	}
+
 	public void pontuacaoDeAcertos() {		
 		
 		

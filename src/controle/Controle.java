@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
+import interfaceUI.Instrucao;
 import interfaceUI.Jogo;
 import interfaceUI.Opcao;
 import interfaceUI.Menu;
@@ -19,7 +19,7 @@ import modelo.Pontos;
 import bancoTXT.ArmazenaRecorde;
 
 public class Controle  implements ActionListener,MouseListener{
-	private boolean jogando = false ,
+	private boolean 
 			facil = false,
 			medio = false,
 			dificil = false;
@@ -36,6 +36,7 @@ public class Controle  implements ActionListener,MouseListener{
 	private Menu menu;
 	private Opcao opcao;
 	private Jogo jogo;
+	private Instrucao instrucao;
 	public ArmazenaRecorde armazenaRecorde;
 	
 	public int imgRandom = 0;
@@ -56,7 +57,7 @@ public class Controle  implements ActionListener,MouseListener{
 		menu = new Menu();
 		menu.addMenuListener(this);
 		menu.setUndecorated(true);
-		menu.setSize(600,510);
+		menu.setSize(600,510);//600,510
 		menu.setDefaultCloseOperation(Menu.DISPOSE_ON_CLOSE);
 		menu.setLocationRelativeTo(null);
 		menu.setVisible(true);
@@ -69,7 +70,6 @@ public class Controle  implements ActionListener,MouseListener{
 		jogo.setSize(1000,680);		
 		jogo.setLocationRelativeTo(null);
 		jogo.setVisible(true);
-//		jogando = true;
 		this.imagemRandom();
 	}
 	public void abrirOpcao() { //dimencionando a JFrame que do nivel do jogo ou fim do jogo. 
@@ -79,18 +79,25 @@ public class Controle  implements ActionListener,MouseListener{
 		opcao.setVisible(true);
 		
 	}
+	public void abrirInstrucao() { //dimencionando a JFrame das instrução do jogo.
+		instrucao = new Instrucao();
+//		instrucao.setUndecorated(true);	
+		instrucao.setListenerInstrucao(this);	
+		instrucao.setDefaultCloseOperation(Instrucao.DISPOSE_ON_CLOSE);
+		instrucao.setSize(700,600);
+		instrucao.setLocationRelativeTo(null);
+		
+		instrucao.setVisible(true);
+		
+	}
 	
 	//deixa os objetos aleátorios.
 	public void imagemRandom() {
-			
-	
 	//instância um objeto da classe Random usando o construtor padrão
 	  Random gerador = new Random();
-	   
 	//imprime sequência de números inteiros aleatórios
-	  for (int i = 0; i <= 20; i++) {
-	  	imgRandom = gerador.nextInt(20);
-	  }
+	  	imgRandom = gerador.nextInt(30);
+
 	  jogo.lbObjeto.setIcon(jogo.imgObjeto = new ImageIcon(getClass().getResource("../ASSETS/ImagensRandom/"+imgRandom+".png")));
 	}
 	
@@ -139,37 +146,26 @@ public class Controle  implements ActionListener,MouseListener{
 	public void pontuacaoDeErros() {
 		
 		pontos.calcular(Pontos.ERROU);
-//		pontos.setOperando(jogo.getCalcSolutionErros());
 		resultado = pontos.calcular(Pontos.ERROU);
-//		jogo.setCalcSolutionErros(resultado);
-		
 		controlaVida-=1;
 		System.out.println(">>ERROU");
 		System.out.println("controlaVida"+controlaVida);
 		jogo.calcularVida(controlaVida);
 		System.out.println("-=======================-");
-//		int contando = controlaVida % 2;
-//		if((contando != 0))controlaVida-=1;
-//		System.out.println("DIVIDIU DEU "+contando);
-//		System.out.println("controlaVida"+controlaVida);
 		if(controlaVida<=(-1)) {
-//		
 		jogo.calcularVida(controlaVida);
 		fimJogo();
 		System.out.println("-=======================-");
 		}
 	}
-//	public int pontuacaoFinal() {
-//		pontuacaoDeAcertos();
-//		return resultado ;
-//	}
+
 //*************************************************************/
 
 
 //***************  CONTROLE DE VIDAS  ************************/
 	
 
-	public void fimJogo() {
+	public void fimJogo() { //PRECISA ARRUMAR AQUI
 		int resultadoGravado = 0;
 		
 		JFrame frame = new JFrame();
@@ -247,19 +243,7 @@ public class Controle  implements ActionListener,MouseListener{
 			menu.dispose();
 			
 		}
-		else if (e.getActionCommand().equals("btnD")) {
-				
-				
-			
-//			teste do botão 
-//			 JFrame frame = new JFrame();
-//			 JOptionPane.showMessageDialog(frame,
-//				        "SUBTRAÇÃO! o botão funciona", //mensagem
-//				        "Erro 200", // titulo da janela 
-//				        JOptionPane.INFORMATION_MESSAGE);
-
-			
-		}
+	
 		
 
 		else if(e.getActionCommand().equals("btnRecorde")) {
@@ -285,20 +269,21 @@ public class Controle  implements ActionListener,MouseListener{
 		}
 		else if(e.getActionCommand().equals("mInstrucao")) {
 			
-			 JFrame frame = new JFrame();
-			 JOptionPane.showMessageDialog(frame,
-				        "Lorem Ipsum is simply dummy text of the printing \n"
-				      + "and typesetting industry. Lorem Ipsum has been the \n"
-				      + "industry's standard dummy text ever since the 1500s, \n"
-				      + " when an unknown printer took a galley of type and scrambled \n"
-				      + "it to make a type specimen book. It has survived not only five \n "
-				      + "centuries, but also the leap into electronic typesetting, remaining \n "
-				      + "essentially unchanged. It was popularised in the 1960s with the release \n"
-				      + " of Letraset sheets containing Lorem Ipsum passages, and more recently \n"
-				      + "with desktop publishing software like Aldus PageMaker including \n"
-				      + " versions of Lorem Ipsum.", //mensagem
-				        "INSTRUÇÃO", // titulo da janela 
-				        JOptionPane.INFORMATION_MESSAGE);
+			abrirInstrucao();
+//			 JFrame frame = new JFrame();
+//			 JOptionPane.showMessageDialog(frame,
+//				        "Lorem Ipsum is simply dummy text of the printing \n"
+//				      + "and typesetting industry. Lorem Ipsum has been the \n"
+//				      + "industry's standard dummy text ever since the 1500s, \n"
+//				      + " when an unknown printer took a galley of type and scrambled \n"
+//				      + "it to make a type specimen book. It has survived not only five \n "
+//				      + "centuries, but also the leap into electronic typesetting, remaining \n "
+//				      + "essentially unchanged. It was popularised in the 1960s with the release \n"
+//				      + " of Letraset sheets containing Lorem Ipsum passages, and more recently \n"
+//				      + "with desktop publishing software like Aldus PageMaker including \n"
+//				      + " versions of Lorem Ipsum.", //mensagem
+//				        "INSTRUÇÃO", // titulo da janela 
+//				        JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(e.getActionCommand().equals("btnSair")) {
 			System.exit(0);
@@ -320,52 +305,51 @@ public class Controle  implements ActionListener,MouseListener{
 		
 		else if(e.getActionCommand().equals("mMenuVoltar")) {
 				jogo.dispose()	;
-				
-				//jogo.setVisible(false);
-						
+					
 				this.abrirMenu();
 		}
+		else if(e.getActionCommand().equals("mVoltar")) {
+			instrucao.dispose() ;
+				
+//			this.abrirMenu();
+	}
 				
 		else if(e.getActionCommand().equals("mFechar")) {
 				System.exit(0);
 		}
-		else if(e.getActionCommand().equals("mReiniciar")) {
+//		else if(e.getActionCommand().equals("mReiniciar")) {
+//			
+//			if(	facil = true) {
+//				jogo.dispose();
+//				jogo = new Jogo(Jogo.FACIL);
+//				this.abrirJogo();
+//	
+//				jogo.setListenerJogoF(this);
+//				facil = false;
+//				
+//			}
+//			else if(medio = true){
+//				jogo.dispose();
+//				jogo = new Jogo(Jogo.MEDIO);
+//				this.abrirJogo();
+//				
+//				jogo.setListenerJogoM(this);
+//				medio = false;
+//		}
+//			else if(dificil = true){
+//				jogo.dispose();
+//				jogo = new Jogo(Jogo.DIFICIL);
+//				this.abrirJogo();
+//				
+//				jogo.setListenerJogoM(this);
+//				dificil = false;
+//	}
 			
-			if(	facil = true) {
-				jogo.dispose();
-				jogo = new Jogo(Jogo.FACIL);
-				this.abrirJogo();
-	
-				jogo.setListenerJogoF(this);
-				facil = false;
 				
-			}
-			else if(medio = true){
-				jogo.dispose();
-				jogo = new Jogo(Jogo.MEDIO);
-				this.abrirJogo();
-				
-				jogo.setListenerJogoM(this);
-				medio = false;
-		}
-			
-				
-		}
+//		}
 		
 //		MANIPULANDO BOTOES DE LIXO:
 		else if(e.getActionCommand().equals("mLixo1")){
-			//MANIPULANDO OS PONTOS E PORCENTAGEM DE VIDA SE ACERTAR 
-			//OU ERRAR OS LIXOS:
-//			if((imgRandom>=0)&&(imgRandom<=10)){	
-//			System.out.println("VIDA Acertou : "+controlaVida);
-//			pontuacaoDeAcertos();
-//			}
-//			else {
-//			System.out.println("VIDA errou : "+controlaVida);
-//			pontuacaoDeErros();
-//			}
-//			this.imagemRandom();
-			
 			
 			if((imgRandom>=0)&&(imgRandom<=10)){	
 				System.out.println("VIDA Acertou : "+controlaVida);
@@ -389,6 +373,7 @@ public class Controle  implements ActionListener,MouseListener{
 				}
 				this.imagemRandom();
 				}
+		
 		else if(e.getActionCommand().equals("mLixo3")){
 						 
 			if((imgRandom>20)&&(imgRandom<=30)){
@@ -400,9 +385,10 @@ public class Controle  implements ActionListener,MouseListener{
 				pontuacaoDeErros();
 				}
 				this.imagemRandom();
-			
 				}
+		
 		else if(e.getActionCommand().equals("mLixo4")){
+			
 			if((imgRandom>30)&&(imgRandom<=40)){
 				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
@@ -413,7 +399,9 @@ public class Controle  implements ActionListener,MouseListener{
 				}
 				this.imagemRandom();
 				}
+		
 		else if(e.getActionCommand().equals("mLixo5")){
+			
 			if((imgRandom>40)&&(imgRandom<=50)){
 				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
@@ -424,7 +412,9 @@ public class Controle  implements ActionListener,MouseListener{
 				}
 				this.imagemRandom();
 				}
+		
 		else if(e.getActionCommand().equals("mLixo6")){
+			
 			if((imgRandom>50)&&(imgRandom<=60)){
 				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
@@ -434,44 +424,10 @@ public class Controle  implements ActionListener,MouseListener{
 				pontuacaoDeErros();
 				}
 				this.imagemRandom();
-				}
-//		else if(e.getActionCommand().equals("mLixo7")){
-//			if((imgRandom>60)&&(imgRandom<=70)){
-//				System.out.println("VIDA Acertou : "+controlaVida);
-//			pontuacaoDeAcertos();
-//			}
-//			else {
-//			System.out.println("VIDA errou : "+controlaVida);
-//			pontuacaoDeErros();
-//			}
-//			this.imagemRandom();
-//			}
-//		else if(e.getActionCommand().equals("mLixo8")){
-//			if((imgRandom>70)&&(imgRandom<=80)){
-//				System.out.println("VIDA Acertou : "+controlaVida);
-//			pontuacaoDeAcertos();
-//			}
-//			else {
-//			System.out.println("VIDA errou : "+controlaVida);
-//			pontuacaoDeErros();
-//			}
-//			this.imagemRandom();
-//			}
-//		else if(e.getActionCommand().equals("mLixo9")){
-//			if((imgRandom>80)&&(imgRandom<=90)){
-//				System.out.println("VIDA Acertou : "+controlaVida);
-//			pontuacaoDeAcertos();
-//			}
-//			else {
-//			System.out.println("VIDA errou : "+controlaVida);
-//			pontuacaoDeErros();
-//			}
-//			this.imagemRandom();
-//			}
-
-
+				}	
 	}
 	
+//	---- APAGAR DAQUI PRA BAIXO ---- APAGAR
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -492,26 +448,26 @@ public class Controle  implements ActionListener,MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		movendoImagem();
+//		movendoImagem();
 		
 	}
 	@Override	
 	public void mouseReleased(MouseEvent e) {
-	movendoImagem();
+//	movendoImagem();
 	}
-	public void movendoImagem() {
-			new Thread() {
-				public void run() {
-				while(true) {
-					
-					try {sleep(10);}catch(Exception Erro){}
-					
-						Point ponto =  jogo.getMousePosition();
-						jogo.lbObjeto.setBounds(ponto.x-100,ponto.y-100,200,200);
-					
-				}
-			}
-		}.start();
+//	public void movendoImagem() {
+//			new Thread() {
+//				public void run() {
+//				while(true) {
+//					
+//					try {sleep(10);}catch(Exception Erro){}
+//					
+//						Point ponto =  jogo.getMousePosition();
+//						jogo.lbObjeto.setBounds(ponto.x-100,ponto.y-100,200,200);
+//					
+//				}
+//			}
+//		}.start();
 		
-	}
+//	}
 }

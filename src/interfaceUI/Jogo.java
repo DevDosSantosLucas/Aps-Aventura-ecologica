@@ -134,6 +134,7 @@ public class Jogo extends JFrame  {
 					("../ASSETS/Imagens-tipos-lixos/lixoFechadoServiçosDeSaude.png")),
 			lixoSaudeA= new ImageIcon(getClass().getResource
 					("../ASSETS/Imagens-tipos-lixos/lixoAbertoServiçosDeSaude.png"));
+			
 			int resultado;
 	
 	public Jogo(int nivelDoJogo ) {

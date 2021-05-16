@@ -16,24 +16,18 @@ import interfaceUI.Menu;
 public class Menu  extends JFrame{
 	
 	public JButton btnIncremento, btnDecremento;
-	
-	//Aqui tem que ser static
-
-	
-
-	
+		
 	private ImageIcon 	imgIniciar = new ImageIcon(getClass().getResource("../ASSETS/iconePlay.png")),
 						imgRecorde = new ImageIcon(getClass().getResource("../ASSETS/iconeRecord.png")),
 						imgSair    = new ImageIcon(getClass().getResource("../ASSETS/iconeFechar.png")),
 						imgAjuda   = new ImageIcon(getClass().getResource("../ASSETS/iconeAjuda.png"));
-	private JLabel lbTextoLogo;
+	private JLabel      lbTextoLogo;
 	
 	
 	private JButton btnIniciar, btnRecorde, btnInstrucao, btnSair;
 	public Menu() {
+		
 		getContentPane().setLayout(null);
-		
-		
 		
 		lbTextoLogo = new JLabel("<html>AVENTURA<br> ECOLÓGICA</html>");
 		lbTextoLogo.setForeground(Color.DARK_GRAY);
@@ -83,12 +77,7 @@ public class Menu  extends JFrame{
 	lbImg.setBounds(50,0,500,500);
 	img.setImage(img.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(),10));	// redimenciona a imagem
 	getContentPane().add(lbImg);
-	
-	
-	
 	}
-	
-
 	
 	public void addMenuListener(ActionListener listenForCalcButton){
 		btnIniciar.addActionListener(listenForCalcButton);

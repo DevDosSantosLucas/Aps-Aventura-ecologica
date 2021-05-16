@@ -232,22 +232,18 @@ public class Jogo extends JFrame  {
 			break;	
 		case 4:
 			lbVidaCheia5.setBounds(0,0,0,0); 	
-//			lbVidaCheia4.setBounds(200,0,50,50);
 			System.out.println("caso4");
 			break;	
 		case 3:
 			lbVidaCheia4.setBounds(0,0,0,0); 
-//			lbVidaCheia3.setBounds(150,0,50,50);
 			System.out.println("caso3");
 			break;
 		case 2:
 			lbVidaCheia3.setBounds(0,0,0,0); 
-//			lbVidaCheia2.setBounds(100,0,50,50);	
 			System.out.println("caso2");
 			break;
 		case 1:
 			lbVidaCheia2.setBounds(0,0,0,0); 	
-//			lbVidaCheia1.setBounds(50,0,50,50);	
 			System.out.println("caso1");
 			break;
 		case 0:
@@ -267,7 +263,6 @@ public class Jogo extends JFrame  {
 			//MENU\\
 			ImageIcon imgMenu = new ImageIcon(getClass().getResource("../ASSETS/iconeHome.png"));
 			ImageIcon imgRecord = new ImageIcon(getClass().getResource("../ASSETS/iconeRecord.png"));
-//			ImageIcon imgErrou = new ImageIcon(getClass().getResource("../ASSETS/iconeDeslike.png"));
 			ImageIcon imgFechar = new ImageIcon(getClass().getResource("../ASSETS/iconeFechar.png"));
 			ImageIcon imgInstrucao = new ImageIcon(getClass().getResource("../ASSETS/iconeAjuda.png"));
 			
@@ -294,17 +289,7 @@ public class Jogo extends JFrame  {
 			tfRecorde.setEnabled(false);
 			painelJogo.add(tfRecorde);
 
-//			JLabel lbErro = new JLabel(imgErrou);
-//			lbErro.setBounds(5,100,40,40);
-//			painelJogo.add(lbErro);
-//
-//			tfErrou = new JTextField("0");	
-//			tfErrou.setBounds(50, 100,150, 40);
-//			tfErrou.setForeground(Color.red);
-//			tfErrou.setBackground(Color.darkGray);
-//			tfErrou.setFont(new Font("Arial", Font.BOLD,30));
-//			tfErrou.setEnabled(false);
-//			painelJogo.add(tfErrou);
+
 					
 			mnInstrucao = new JButton();
 			mnInstrucao.setIcon(imgInstrucao);
@@ -385,9 +370,6 @@ public class Jogo extends JFrame  {
 			painelJogo.add(btnLixo4(), null);
 			painelJogo.add(btnLixo5(), null);
 			painelJogo.add(btnLixo6(), null);
-//			painelJogo.add(btnLixo7(), null);	/*
-//			painelJogo.add(btnLixo8(), null);	*	FALTA 	ORGANIZAR OS Bounds dos lixos
-//			painelJogo.add(btnLixo9(), null);	*/
 			
 		}
 		return painelJogo;
@@ -417,7 +399,6 @@ public class Jogo extends JFrame  {
 	public JButton btnLixo1() {
 //			//ORGANICO- MARROM\\
 			btnImgLixo1 = new JButton();
-//			btnImgLixo1.setToolTipText("ORGANICO"); // mostra texto com o mouse em cima
 			btnImgLixo1.setIcon(lixoOrganicoF);
 			btnImgLixo1.setBorderPainted(false);
 			btnImgLixo1.setContentAreaFilled(false);
@@ -692,7 +673,7 @@ public JButton btnLixo9() {
 		});
 		return btnImgLixo9;
 	}
-//MANIPULA OS ACERTOS ************************88
+//MANIPULA OS ACERTOS **************************
 public int getCalcPontos(){
 	System.out.println("getCalcPontos()");
 	return Integer.parseInt(tfRecorde.getText());
@@ -703,19 +684,6 @@ public int getCalcSolution(){
 public void setCalcSolution(int solution){
 	Jogo.tfRecorde.setText(String.valueOf(solution));
 }
-//****************************************************
-
-//MANIPULA PONTOS DE ERROS****************************
-//public int getCalcErros(){
-//	return Integer.parseInt(tfErrou.getText());
-//}
-//public int getCalcSolutionErros(){
-//	return Integer.parseInt(tfErrou.getText());
-//}
-//public void setCalcSolutionErros(int solution){
-//	Jogo.tfErrou.setText(String.valueOf(solution));
-//}
-//*****************************************************
 
 public void setListenerJogo(ActionListener listener) {
 		//CHAMA OS BOTÕES PARA A CLASSE CONTROLE

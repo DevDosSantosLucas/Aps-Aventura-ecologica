@@ -80,7 +80,7 @@ public class Jogo extends JFrame  {
 	
 	public JPanel painelJogo = null, painel = null;
 
-	public JButton mnVoltarMenu,mnSom,mnFechar;
+	public JButton mnVoltarMenu,mnInstrucao,mnFechar;
 				 
 	private static JTextField tfRecorde,tfErrou;
 
@@ -267,9 +267,9 @@ public class Jogo extends JFrame  {
 			//MENU\\
 			ImageIcon imgMenu = new ImageIcon(getClass().getResource("../ASSETS/iconeHome.png"));
 			ImageIcon imgRecord = new ImageIcon(getClass().getResource("../ASSETS/iconeRecord.png"));
-			ImageIcon imgErrou = new ImageIcon(getClass().getResource("../ASSETS/iconeDeslike.png"));
+//			ImageIcon imgErrou = new ImageIcon(getClass().getResource("../ASSETS/iconeDeslike.png"));
 			ImageIcon imgFechar = new ImageIcon(getClass().getResource("../ASSETS/iconeFechar.png"));
-			ImageIcon imgSom = new ImageIcon(getClass().getResource("../ASSETS/iconeSom.png"));
+			ImageIcon imgInstrucao = new ImageIcon(getClass().getResource("../ASSETS/iconeAjuda.png"));
 			
 					
 			posicaoDeVida();
@@ -306,12 +306,13 @@ public class Jogo extends JFrame  {
 //			tfErrou.setEnabled(false);
 //			painelJogo.add(tfErrou);
 					
-			mnSom = new JButton();
-			mnSom.setIcon(imgSom);
-			mnSom.setBounds(900,0,50,50);
-			mnSom.setBorderPainted(false);
-			mnSom.setContentAreaFilled(false);
-			painelJogo.add(mnSom);
+			mnInstrucao = new JButton();
+			mnInstrucao.setIcon(imgInstrucao);
+			mnInstrucao.setActionCommand("mInstrucao");
+			mnInstrucao.setBounds(900,5,50,50);
+			mnInstrucao.setBorderPainted(false);
+			mnInstrucao.setContentAreaFilled(false);
+			painelJogo.add(mnInstrucao);
 			
 			mnFechar = new JButton();
 			mnFechar.setIcon(imgFechar);
@@ -720,6 +721,7 @@ public void setListenerJogo(ActionListener listener) {
 		//CHAMA OS BOTÕES PARA A CLASSE CONTROLE
 	mnVoltarMenu.addActionListener(listener);
 	mnFechar.addActionListener(listener);
+	mnInstrucao.addActionListener(listener);
 }
 	public void setListenerJogoF(ActionListener listener) {
 		//CHAMA OS BOTÕES (LIXOS) DO NÍVEL FÁCIL PARA A CLASSE CONTROLE

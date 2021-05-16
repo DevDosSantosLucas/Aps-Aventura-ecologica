@@ -132,14 +132,7 @@ public class Instrucao extends JFrame {
 			getContentPane().add(scroll);
 			
 			
-
-			
-//					paineldeInstrucao.setBounds(50,50,1000,1000);
-			
-//			this.setContentPane(lixos());
-//			paineldeInstrucao.add(lbImgOrganico);
-			
-			
+		
 			
 			
 			JLabel lbImgOrganico = new JLabel(lixoOrganico);

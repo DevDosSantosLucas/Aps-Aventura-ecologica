@@ -81,7 +81,7 @@ public class Controle  implements ActionListener,MouseListener{
 	}
 	public void abrirInstrucao() { //dimencionando a JFrame das instrução do jogo.
 		instrucao = new Instrucao();
-//		instrucao.setUndecorated(true);	
+		instrucao.setUndecorated(true);	
 		instrucao.setListenerInstrucao(this);	
 		instrucao.setDefaultCloseOperation(Instrucao.DISPOSE_ON_CLOSE);
 		instrucao.setSize(700,600);

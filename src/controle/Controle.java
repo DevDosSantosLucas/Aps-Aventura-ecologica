@@ -1,6 +1,5 @@
 package controle;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -23,13 +22,12 @@ public class Controle  implements ActionListener,MouseListener{
 			facil = false,
 			medio = false,
 			dificil = false;
-	int resultadoF, resultadoM,resultadoD, maiorRecorde;
+	private int resultado;
+	private String recordeFacil, recordeMedio, recordeDificil ;
 	
-//	public static final int    = 0;
-//	public static final int ERROU     = 1;
 	
 	private int controlaVida = 5;
-	
+	private String resultadoGravado ;
 	
 	private Pontos pontos;
 	
@@ -109,18 +107,20 @@ public class Controle  implements ActionListener,MouseListener{
 					jogo = new Jogo(Jogo.FACIL);
 					jogo.setListenerJogoF(this);
 					jogo.calcularVida(8);
+					controlaVida = 5;
 					facil =true;
 	
 				}
 			 if(opcao.btnMedio.isSelected()) {
-						facil = false; dificil = false;
-						jogo = new Jogo(Jogo.MEDIO);
-						jogo.setListenerJogoM(this);
-						jogo.calcularVida(7);
-						medio = true;
-										
+				    controlaVida = 3;
+					facil = false; dificil = false;
+					jogo = new Jogo(Jogo.MEDIO);
+					jogo.setListenerJogoM(this);
+					jogo.calcularVida(7);
+					medio = true;						
 				}
 			 if(opcao.btnDificil.isSelected()) {
+				 	controlaVida = 0;
 					facil = false; medio = false;	
 					jogo = new Jogo(Jogo.DIFICIL);
 					jogo.setListenerJogoD(this);
@@ -132,7 +132,7 @@ public class Controle  implements ActionListener,MouseListener{
 		
 //*******  AQUI FAZ A PONTUAÇÃO MODELO VS INTERFACE  ***********/
 //*******   E CONTROLE DO CORAÇÃO PARA MOSTRAR VIDA  ***********/
-		int resultado;
+		
 	public void pontuacaoDeAcertos() {	
 		
 		pontos.calcular(Pontos.ACERTOU);
@@ -148,78 +148,85 @@ public class Controle  implements ActionListener,MouseListener{
 		pontos.calcular(Pontos.ERROU);
 		resultado = pontos.calcular(Pontos.ERROU);
 		controlaVida-=1;
-		System.out.println(">>ERROU");
-		System.out.println("controlaVida"+controlaVida);
 		jogo.calcularVida(controlaVida);
-		System.out.println("-=======================-");
 		if(controlaVida<=(-1)) {
 		jogo.calcularVida(controlaVida);
 		fimJogo();
-		System.out.println("-=======================-");
 		}
 	}
 
 //*************************************************************/
 
-
-//***************  CONTROLE DE VIDAS  ************************/
+//***************  CONTROLE DE PONTOS  ************************/
 	
+	public void armazenamentoDePontos() {
 
+		armazenaRecorde = new ArmazenaRecorde();
+
+		String recordArmazenado =armazenaRecorde.lerRecorde();
+		 recordeFacil = recordArmazenado.split(";")[0];
+		 recordeMedio = recordArmazenado.split(";")[1];
+		 recordeDificil = recordArmazenado.split(";")[2];
+	}
 	public void fimJogo() { //PRECISA ARRUMAR AQUI
-		int resultadoGravado = 0;
+		int recorde = 0;
+		String nivel = "";
 		
 		JFrame frame = new JFrame();
 		pontos.calcular(Pontos.ACERTOU);
 		pontos.setOperando(jogo.getCalcSolution());
-		 resultado = pontos.calcular(Pontos.ACERTOU);
-		jogo.setCalcSolution(resultado);
-  
-//		System.out.println(resultado);
-//		if(facil == true)
-//		{	resultadoF = resultado;
-////			{maiorRecorde = resultadoF;}
-//		System.out.println(resultado +""+ resultadoF);}
-//		if(medio == true)
-//		System.out.println(resultado);
-//		{	resultadoM = resultado;}
-//		if(dificil == true)
-//		{	 resultadoD = resultado;}
-////		
-//		Armazenar no TXT 
-		armazenaRecorde = new ArmazenaRecorde();
-		armazenaRecorde.escreveRecorde(resultado);
-		String recordArmazenado =armazenaRecorde.lerRecorde();
-		String recorde = resultado+"";
-		if(facil == true) {
-			armazenaRecorde.escreveRecorde(recorde ,1);
-		System.out.println("RESULTADO:"+resultado);
-		String recordeFacil = recordArmazenado.split(";")[0];
-		System.out.println("recordeFacil:"+recordeFacil);
+		resultado = pontos.calcular(Pontos.ACERTOU);
+		resultado --;
+//		jogo.setCalcSolution(resultado);
+		armazenamentoDePontos();
 		
-		resultadoGravado = Integer.parseInt(recordeFacil);
-		System.out.println("resultadoGravado:"+resultadoGravado);
+		if(facil == true) {
+			String ponto = resultado+";"+recordeMedio+";"+recordeDificil;
+			resultadoGravado =  recordeFacil;
+			recorde = Integer.parseInt(recordeFacil);
+			nivel = "FÁCIL";
+				if(resultado > recorde) {
+				armazenaRecorde.escreveRecorde(ponto);
+				}
+			
 		}
 		if(medio == true) {
-		armazenaRecorde.escreveRecorde(resultado);
-		String recordeMedio = recordArmazenado.split(";")[1];
-		resultadoGravado = Integer.parseInt(recordeMedio);
+			String ponto = recordeFacil+";"+resultado+";"+recordeDificil;
+			resultadoGravado =  recordeMedio;
+			recorde = Integer.parseInt(recordeMedio);
+			nivel = "MÉDIO";
+				if(resultado > recorde) {
+				armazenaRecorde.escreveRecorde(ponto);
+				}
 		}
 		if(dificil == true) {
-		String recordeDificil = recordArmazenado.split(";")[2];
-		resultadoGravado = Integer.parseInt(recordeDificil);
+			String ponto = recordeFacil+";"+recordeMedio+";"+resultado;
+			resultadoGravado =  recordeDificil;
+			recorde = Integer.parseInt(recordeDificil);
+			nivel = "DIFÍCIL";
+				if(resultado > recorde) {
+				armazenaRecorde.escreveRecorde(ponto);
+				}
 		}
-		if(resultado<=resultadoGravado) {
+		
+		if(resultado >recorde) {
+			
 		 JOptionPane.showMessageDialog(frame,
-			        ">>NIVEIS: \n "
-			       +"Seu Resultado foi: "+recorde+"\n"
-			       +"O Recorde é:   "+resultadoGravado+ "\n ", //mensagem
-			        "RECORDES", // titulo da janela 
+			        ">>PARABÉNS:  \n "
+			       +"SEU NOVO RECORDE É:  "+resultado+"",
+			        "RECORDE NÍVEL "+nivel, // titulo da janela 
 			        JOptionPane.INFORMATION_MESSAGE);
 		}
-
+		 
+		 else if(resultado <= recorde) {
+		 JOptionPane.showMessageDialog(frame,
+			        ">>NÍVEL "+nivel+" \n "
+			       +"Seu Resultado foi:  "+resultado+"\n "
+			       +"O Recorde é:  "+resultadoGravado, 
+			        "PONTUAÇÃO", // titulo da janela 
+			        JOptionPane.INFORMATION_MESSAGE);
+		 }
 			jogo.dispose()	;	
-			
-
 			this.abrirMenu();
 	}
 	
@@ -235,56 +242,29 @@ public class Controle  implements ActionListener,MouseListener{
 //		BOTÕES DO MENU	 \\
 //-----------------------\\	
 
-		if(e.getActionCommand().equals("btnIniciar")) {
-			
-								
+		if(e.getActionCommand().equals("btnIniciar")) {				
 			opcao= new Opcao(Opcao.JOGO);
 			this.abrirOpcao();
 			menu.dispose();
-			
 		}
-	
-		
 
 		else if(e.getActionCommand().equals("btnRecorde")) {
-			
 			 JFrame frame = new JFrame();
-//			 
-//			 if(facil == true)
-//				{	resultadoF = resultado;}
-//				System.out.println("Resultado teste DEU "+resultadoF);
-//
-//				if(medio == true)
-//				{	resultadoM = resultado;}
-//				if(dificil == true)
-//				{	 resultadoD = resultado;}
+			 armazenamentoDePontos() ;
+			 
 			 JOptionPane.showMessageDialog(frame,
 				        ">>NIVEIS: \n "
-				       +"FACIL:  "+resultadoF+" \n "
-				       +"MÉDIO:  "+resultadoM+" \n "
-				       +"DIFÍCIL:"+resultadoD, //mensagem
+				       +"FÁCIL:  "+recordeFacil+" \n "
+				       +"MÉDIO:  "+recordeMedio+" \n "
+				       +"DIFÍCIL: "+recordeDificil, //mensagem
 				        "RECORDES", // titulo da janela 
 				        JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 		else if(e.getActionCommand().equals("mInstrucao")) {
-			
 			abrirInstrucao();
-//			 JFrame frame = new JFrame();
-//			 JOptionPane.showMessageDialog(frame,
-//				        "Lorem Ipsum is simply dummy text of the printing \n"
-//				      + "and typesetting industry. Lorem Ipsum has been the \n"
-//				      + "industry's standard dummy text ever since the 1500s, \n"
-//				      + " when an unknown printer took a galley of type and scrambled \n"
-//				      + "it to make a type specimen book. It has survived not only five \n "
-//				      + "centuries, but also the leap into electronic typesetting, remaining \n "
-//				      + "essentially unchanged. It was popularised in the 1960s with the release \n"
-//				      + " of Letraset sheets containing Lorem Ipsum passages, and more recently \n"
-//				      + "with desktop publishing software like Aldus PageMaker including \n"
-//				      + " versions of Lorem Ipsum.", //mensagem
-//				        "INSTRUÇÃO", // titulo da janela 
-//				        JOptionPane.INFORMATION_MESSAGE);
 		}
+		
 		else if(e.getActionCommand().equals("btnSair")) {
 			System.exit(0);
 		}
@@ -293,7 +273,6 @@ public class Controle  implements ActionListener,MouseListener{
 //	BOTÕES DE OPÇÕES 	\\
 //-----------------------\\	
 		else if(e.getActionCommand().equals("btnComecar")) {
-				//jogo = new JogoUI(0);
 				this.setNivelDoJogo();
 				this.abrirJogo();
 				opcao.dispose();
@@ -305,58 +284,28 @@ public class Controle  implements ActionListener,MouseListener{
 		
 		else if(e.getActionCommand().equals("mMenuVoltar")) {
 				jogo.dispose()	;
-					
 				this.abrirMenu();
 		}
+		
 		else if(e.getActionCommand().equals("mVoltar")) {
-			instrucao.dispose() ;
-				
-//			this.abrirMenu();
-	}
+			instrucao.dispose() ;		
+		}
 				
 		else if(e.getActionCommand().equals("mFechar")) {
 				System.exit(0);
 		}
-//		else if(e.getActionCommand().equals("mReiniciar")) {
-//			
-//			if(	facil = true) {
-//				jogo.dispose();
-//				jogo = new Jogo(Jogo.FACIL);
-//				this.abrirJogo();
-//	
-//				jogo.setListenerJogoF(this);
-//				facil = false;
-//				
-//			}
-//			else if(medio = true){
-//				jogo.dispose();
-//				jogo = new Jogo(Jogo.MEDIO);
-//				this.abrirJogo();
-//				
-//				jogo.setListenerJogoM(this);
-//				medio = false;
-//		}
-//			else if(dificil = true){
-//				jogo.dispose();
-//				jogo = new Jogo(Jogo.DIFICIL);
-//				this.abrirJogo();
-//				
-//				jogo.setListenerJogoM(this);
-//				dificil = false;
-//	}
-			
-				
-//		}
+
 		
+
+//-----------------------\\		
 //		MANIPULANDO BOTOES DE LIXO:
+//-----------------------\\	
 		else if(e.getActionCommand().equals("mLixo1")){
 			
 			if((imgRandom>=0)&&(imgRandom<=10)){	
-				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
 				}
 				else {
-				System.out.println("VIDA errou : "+controlaVida);
 				pontuacaoDeErros();
 				}
 				this.imagemRandom();
@@ -364,11 +313,9 @@ public class Controle  implements ActionListener,MouseListener{
 		else if(e.getActionCommand().equals("mLixo2")){
 			
 			if((imgRandom>10)&&(imgRandom<=20)){
-				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
 				}
 				else {
-				System.out.println("VIDA errou : "+controlaVida);
 				pontuacaoDeErros();
 				}
 				this.imagemRandom();
@@ -377,11 +324,9 @@ public class Controle  implements ActionListener,MouseListener{
 		else if(e.getActionCommand().equals("mLixo3")){
 						 
 			if((imgRandom>20)&&(imgRandom<=30)){
-				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
 				}
 				else {
-				System.out.println("VIDA errou : "+controlaVida);
 				pontuacaoDeErros();
 				}
 				this.imagemRandom();
@@ -390,11 +335,9 @@ public class Controle  implements ActionListener,MouseListener{
 		else if(e.getActionCommand().equals("mLixo4")){
 			
 			if((imgRandom>30)&&(imgRandom<=40)){
-				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
 				}
 				else {
-				System.out.println("VIDA errou : "+controlaVida);
 				pontuacaoDeErros();
 				}
 				this.imagemRandom();
@@ -403,11 +346,9 @@ public class Controle  implements ActionListener,MouseListener{
 		else if(e.getActionCommand().equals("mLixo5")){
 			
 			if((imgRandom>40)&&(imgRandom<=50)){
-				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
 				}
 				else {
-				System.out.println("VIDA errou : "+controlaVida);
 				pontuacaoDeErros();
 				}
 				this.imagemRandom();
@@ -416,18 +357,15 @@ public class Controle  implements ActionListener,MouseListener{
 		else if(e.getActionCommand().equals("mLixo6")){
 			
 			if((imgRandom>50)&&(imgRandom<=60)){
-				System.out.println("VIDA Acertou : "+controlaVida);
 				pontuacaoDeAcertos();
 				}
 				else {
-				System.out.println("VIDA errou : "+controlaVida);
 				pontuacaoDeErros();
 				}
 				this.imagemRandom();
 				}	
 	}
 	
-//	---- APAGAR DAQUI PRA BAIXO ---- APAGAR
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -448,26 +386,11 @@ public class Controle  implements ActionListener,MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-//		movendoImagem();
 		
 	}
 	@Override	
 	public void mouseReleased(MouseEvent e) {
-//	movendoImagem();
+
 	}
-//	public void movendoImagem() {
-//			new Thread() {
-//				public void run() {
-//				while(true) {
-//					
-//					try {sleep(10);}catch(Exception Erro){}
-//					
-//						Point ponto =  jogo.getMousePosition();
-//						jogo.lbObjeto.setBounds(ponto.x-100,ponto.y-100,200,200);
-//					
-//				}
-//			}
-//		}.start();
-		
-//	}
+
 }

@@ -82,22 +82,17 @@ public class Jogo extends JFrame  {
 
 	public JButton mnVoltarMenu,mnInstrucao,mnFechar;
 				 
-	private static JTextField tfRecorde,tfErrou;
+	private static JTextField tfRecorde;
 
-	private Opcao opcao;
-	private Jogo  jogo;
-	private Controle ctrl= new Controle() ;
 	public boolean play = false, function = false;
 	@SuppressWarnings("unused")
 	private int nivelDoJogo,nivel;
 	private ImageIcon img = new ImageIcon(getClass().getResource("../ASSETS/fundoRua2.JPG"));
-		//	ImageIcon imgFim = new ImageIcon(getClass().getResource("../ASSETS/fundoFim.JPG"));
+	
 //.....imagens do lixo aberto e fechado....\\
 			private ImageIcon
 		    imgVidaCheia = new ImageIcon(getClass().getResource
 					("../assets/coracao-cheio.png")),
-			imgVidaVazia= new ImageIcon(getClass().getResource
-					("../ASSETS/coracao-vazio.png")),
 			lixoOrganicoF= new ImageIcon(getClass().getResource
 					("../ASSETS/Imagens-tipos-lixos/lixoFechadoOrganico.png")),
 			lixoOrganicoA= new ImageIcon(getClass().getResource
@@ -121,19 +116,7 @@ public class Jogo extends JFrame  {
 			lixoNaoReciclaF= new ImageIcon(getClass().getResource
 					("../ASSETS/Imagens-tipos-lixos/lixoFechadoNaoReciclaveis.png")),
 			lixoNaoReciclaA= new ImageIcon(getClass().getResource
-					("../ASSETS/Imagens-tipos-lixos/lixoAbertoNaoReciclaveis.png")),
-			lixoPerigososF= new ImageIcon(getClass().getResource
-					("../ASSETS/Imagens-tipos-lixos/lixoFechadoResiduosPerigosos.png")),
-			lixoPerigososA= new ImageIcon(getClass().getResource
-					("../ASSETS/Imagens-tipos-lixos/lixoAbertoResiduosPerigosos.png")),
-			lixoMadeiraF= new ImageIcon(getClass().getResource
-					("../ASSETS/Imagens-tipos-lixos/lixoFechadoMadeira.png")),
-			lixoMadeiraA= new ImageIcon(getClass().getResource
-					("../ASSETS/Imagens-tipos-lixos/lixoAbertoMadeira.png")),
-			lixoSaudeF= new ImageIcon(getClass().getResource
-					("../ASSETS/Imagens-tipos-lixos/lixoFechadoServiçosDeSaude.png")),
-			lixoSaudeA= new ImageIcon(getClass().getResource
-					("../ASSETS/Imagens-tipos-lixos/lixoAbertoServiçosDeSaude.png"));
+					("../ASSETS/Imagens-tipos-lixos/lixoAbertoNaoReciclaveis.png"));
 			
 			int resultado;
 	
@@ -208,7 +191,6 @@ public class Jogo extends JFrame  {
 			lbVidaCheia3.setBounds(150,0,50,50);
 			lbVidaCheia2.setBounds(100,0,50,50);
 			lbVidaCheia1.setBounds(50,0,50,50);	
-			System.out.println("caso8");
 			break;	
 		case 7:
 			lbVidaCheia5.setBounds(0,0,0,0);
@@ -216,7 +198,6 @@ public class Jogo extends JFrame  {
 			lbVidaCheia3.setBounds(150,0,50,50);
 			lbVidaCheia2.setBounds(100,0,50,50);
 			lbVidaCheia1.setBounds(50,0,50,50);	
-			System.out.println("caso7");
 			break;
 		case 6:
 			lbVidaCheia5.setBounds(0,0,0,0);
@@ -224,30 +205,23 @@ public class Jogo extends JFrame  {
 			lbVidaCheia3.setBounds(0,0,0,0);
 			lbVidaCheia2.setBounds(0,0,0,0);
 			lbVidaCheia1.setBounds(50,0,50,50);	
-			System.out.println("caso6");
 			break;
 		case 5:
 			lbVidaCheia5.setBounds(250,0,50,50);
-			System.out.println("caso5");
 			break;	
 		case 4:
 			lbVidaCheia5.setBounds(0,0,0,0); 	
-			System.out.println("caso4");
 			break;	
 		case 3:
 			lbVidaCheia4.setBounds(0,0,0,0); 
-			System.out.println("caso3");
 			break;
 		case 2:
 			lbVidaCheia3.setBounds(0,0,0,0); 
-			System.out.println("caso2");
 			break;
 		case 1:
 			lbVidaCheia2.setBounds(0,0,0,0); 	
-			System.out.println("caso1");
 			break;
 		case 0:
-			System.out.println("caso0");
 			lbVidaCheia1.setBounds(0,0,0,0);
 			break;
 
@@ -288,9 +262,7 @@ public class Jogo extends JFrame  {
 			tfRecorde.setFont(new Font("Arial", Font.BOLD,30));
 			tfRecorde.setEnabled(false);
 			painelJogo.add(tfRecorde);
-
-
-					
+	
 			mnInstrucao = new JButton();
 			mnInstrucao.setIcon(imgInstrucao);
 			mnInstrucao.setActionCommand("mInstrucao");
@@ -311,7 +283,8 @@ public class Jogo extends JFrame  {
 	
 			lbImg = new JLabel(img);
 			lbImg.setBounds(0,0,1000,680);
-			img.setImage(img.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(),1));	// redimenciona a imagem
+			img.setImage(img.getImage()
+					.getScaledInstance(lbImg.getWidth(), lbImg.getHeight(),1));	// redimenciona a imagem
 
 			painelJogo.add(lbImg);
 
@@ -325,24 +298,19 @@ public class Jogo extends JFrame  {
 		 */
 		public JPanel getPainelDoJogoFacil() {
 				
-//			if( painelJogo == null) {
 				painelJogo = new JPanel();
 				this.setContentPane(labelObjetos());
 				painelJogo.setLayout(new BorderLayout());
 				painelJogo.add(btnLixo1(), null);
 				painelJogo.add(btnLixo2(), null);
 				painelJogo.add(btnLixo3(), null);
-				painelJogo.add(btnLixo4(), null);
-				
-				
-				
-//			}
+				painelJogo.add(btnLixo4(), null);	
+
 			return painelJogo;
 	
 		}
 		public JPanel getPainelDoJogoMedio() {
 				
-			if( painelJogo == null) {
 				painelJogo = new JPanel();
 				this.setContentPane(labelObjetos());
 				painelJogo.setLayout(new BorderLayout());
@@ -352,15 +320,13 @@ public class Jogo extends JFrame  {
 				painelJogo.add(btnLixo4(), null);
 				painelJogo.add(btnLixo5(), null);
 				painelJogo.add(btnLixo6(), null);
-			
-			}
+		
 			return painelJogo;
 	
 		}
 		
 		public JPanel getPainelDoJogoDificil() {
 			
-		if( painelJogo == null) {
 			painelJogo = new JPanel();
 			this.setContentPane(labelObjetos());
 			painelJogo.setLayout(new BorderLayout());
@@ -371,7 +337,6 @@ public class Jogo extends JFrame  {
 			painelJogo.add(btnLixo5(), null);
 			painelJogo.add(btnLixo6(), null);
 			
-		}
 		return painelJogo;
 	}
 
@@ -384,9 +349,6 @@ public class Jogo extends JFrame  {
 			lbObjeto.setBorderPainted(false);
 			lbObjeto.setContentAreaFilled(false);
 			lbObjeto.setBounds(450,500,200,200);
-			//imgObjeto.setImage(imgObjeto.getImage()	/*
-			//.getScaledInstance(lbObjeto.getWidth(),	*	redimenciona a imagem
-			//lbObjeto.getHeight(),10));				/* 	(dando erro).
 			painelJogo.add(lbObjeto);
 			
 			return painelJogo;
@@ -408,7 +370,7 @@ public class Jogo extends JFrame  {
 					.getScaledInstance(btnImgLixo1.getWidth(), btnImgLixo1.getHeight(),1));
 
 			btnImgLixo1.addMouseListener(new MouseListener() {
-				// TROCA DE .\\
+				// TROCA DE IMAGENS.\\
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
 					btnImgLixo1.setIcon(lixoOrganicoA);
@@ -587,92 +549,7 @@ public class Jogo extends JFrame  {
 			});
 			return btnImgLixo6;
 		}
-	public JButton btnLixo7() {
-//		//RESIDUOS PERIGOSOS-LARANJA\\
-		btnImgLixo7 = new JButton();
-		btnImgLixo7.setIcon(lixoPerigososF);
-		btnImgLixo7.setBorderPainted(false);
-		btnImgLixo7.setContentAreaFilled(false);
-		btnImgLixo7.setBounds(650,130,150,280);
-		lixoPerigososF.setImage(lixoPerigososF.getImage()
-				.getScaledInstance(btnImgLixo7.getWidth(), btnImgLixo7.getHeight(),1));
-		btnImgLixo7.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				btnImgLixo7.setIcon(lixoPerigososA);
-			}
-			public void mouseExited(MouseEvent arg0) {
-				btnImgLixo7.setIcon(lixoPerigososF);
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {	
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}		
-		});
-		return btnImgLixo7;
-	}
-public JButton btnLixo8() {
-//		//PRETO - MADEIRA\\
-		btnImgLixo8 = new JButton();
-		btnImgLixo8.setIcon(lixoMadeiraF);
-		btnImgLixo8.setBorderPainted(false);
-		btnImgLixo8.setContentAreaFilled(false);
-		btnImgLixo8.setBounds(50,130,150,280);
-		lixoMadeiraF.setImage(lixoMadeiraF.getImage()
-				.getScaledInstance(btnImgLixo8.getWidth(), btnImgLixo8.getHeight(),1));
-		btnImgLixo8.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				btnImgLixo8.setIcon(lixoMadeiraA);
-			}
-			public void mouseExited(MouseEvent arg0) {
-				btnImgLixo8.setIcon(lixoMadeiraF);
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {	
-			}
-		});
-		return btnImgLixo8;
-	}
-public JButton btnLixo9() {
-//		//SERVIÇOS DE SAÚDE - BRANCO\\
-		btnImgLixo9 = new JButton(lixoSaudeF);
-		btnImgLixo9.setBorderPainted(false);
-		btnImgLixo9.setContentAreaFilled(false);
-		btnImgLixo9.setBounds(800,130,150,280);
-		lixoSaudeF.setImage(lixoSaudeF.getImage()
-				.getScaledInstance(btnImgLixo9.getWidth(), btnImgLixo9.getHeight(),1));
-		btnImgLixo8.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				btnImgLixo9.setIcon(lixoSaudeA);
-			}
-			public void mouseExited(MouseEvent arg0) {
-				btnImgLixo9.setIcon(lixoSaudeF);
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}	
-		});
-		return btnImgLixo9;
-	}
+
 //MANIPULA OS ACERTOS **************************
 public int getCalcPontos(){
 	System.out.println("getCalcPontos()");

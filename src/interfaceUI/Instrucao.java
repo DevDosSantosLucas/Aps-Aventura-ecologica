@@ -2,24 +2,16 @@ package interfaceUI;
 
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
-import modelo.Pontos;
 
 public class Instrucao extends JFrame {
 		
@@ -27,16 +19,9 @@ public class Instrucao extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-		public static final int JOGO= 0;
-		public static final int FIM_DE_JOGO = 1;
-		public static final int RECORD = 2;
-		public static final int INSTRUCAO = 3;
-		public static final int SAIR = 4;
-		
+
 
 		
-		private	ItemListener handler;
 		private JScrollPane scroll;
 		private JPanel paineldeInstrucao;
 		
@@ -45,11 +30,9 @@ public class Instrucao extends JFrame {
 		@SuppressWarnings("unused")
 		private int modoDeTela;
 		
-		public JRadioButton btnFacil,btnMedio,btnDificil,
-							btnMouse,btnTeclado;
-		private ButtonGroup btnEscolheNivel,btnEscolheFuncao;
+
 		
-		private JButton btnOkNivel,btnVoltar;
+		private JButton btnVoltar;
 		private ImageIcon imgVoltar,
 		lixoOrganico= new ImageIcon(getClass().getResource
 				("../ASSETS/Imagens-tipos-lixos/lixoFechadoOrganico.png")),
@@ -64,12 +47,8 @@ public class Instrucao extends JFrame {
 				("../ASSETS/Imagens-tipos-lixos/lixoFechadoMetal.png")),
 		lixoNaoReciclavel= new ImageIcon(getClass().getResource
 				("../ASSETS/Imagens-tipos-lixos/lixoFechadoNaoReciclaveis.png"));
-	
-		
 		JLabel lbTitulo;
 
-		Pontos pontos;Jogo jogo; int resultado;
-		
 		public Instrucao() {
 			
 			getContentPane().setLayout(null);
@@ -120,7 +99,6 @@ public class Instrucao extends JFrame {
 		    		+ "QUE CORRESPONDE A <br>"
 		    		+ "IMAGEM! </p>"
 		    		+ "</html>");
-//		    lbTitulo.setForeground(Color.);
 		    lbDescricao.setBounds(5,100,420,400);
 		    lbDescricao.setFont(new Font("Arial", Font.BOLD,20));
 		    

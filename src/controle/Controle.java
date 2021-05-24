@@ -94,7 +94,12 @@ public class Controle  implements ActionListener,MouseListener{
 	//instância um objeto da classe Random usando o construtor padrão
 	  Random gerador = new Random();
 	//imprime sequência de números inteiros aleatórios
-	  	imgRandom = gerador.nextInt(30);
+	  if(facil == true) {
+		  imgRandom = gerador.nextInt(40);  
+	  }
+	  if(medio == true || dificil == true) {
+		  imgRandom = gerador.nextInt(60);
+	  }
 
 	  jogo.lbObjeto.setIcon(jogo.imgObjeto = new ImageIcon(getClass().getResource("../ASSETS/ImagensRandom/"+imgRandom+".png")));
 	}

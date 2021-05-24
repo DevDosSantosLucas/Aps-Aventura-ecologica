@@ -68,9 +68,6 @@ public class Menu  extends JFrame{
 		getContentPane().add(btnSair);
 		
 		
-		
-		
-
 		//IMAGEM DE FUNDO\\
 	ImageIcon img = new ImageIcon(getClass().getResource("../ASSETS/iconRecicla.png"));
 	JLabel lbImg = new JLabel(img);

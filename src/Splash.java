@@ -42,7 +42,5 @@ public class Splash {
 			Thread.sleep(TEMPO_DE_SPLASH);
 		}catch(InterruptedException e ) {System.err.println(e.getMessage());
 		 e.printStackTrace();}
-		
-		
 	}
 }
